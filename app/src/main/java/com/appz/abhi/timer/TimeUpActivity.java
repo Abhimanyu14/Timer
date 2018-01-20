@@ -1,7 +1,6 @@
 package com.appz.abhi.timer;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -30,15 +29,18 @@ public class TimeUpActivity extends AppCompatActivity {
                 MediaPlayer mediaPlayer = AlarmReceiver.mediaPlayer;
                 mediaPlayer.stop();
                 if (vibration_flag) {
-                    vibrator.cancel();
+                    if (vibrator != null) {
+                        vibrator.cancel();
+                    }
                 }
-                startActivity(new Intent(TimeUpActivity.this, MainActivity.class));
                 finish();
             }
         });
         if (vibration_flag) {
             long[] pattern = {0, 1000, 200}; //0 to start now, 200 to vibrate 200 ms, 0 to sleep for 0 ms.
-            vibrator.vibrate(pattern, 0);
+            if (vibrator != null) {
+                vibrator.vibrate(pattern, 0);
+            }
         }
     }
 }
