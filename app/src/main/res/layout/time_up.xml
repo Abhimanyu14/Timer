@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context="com.appz.abhi.timer.TimeUpActivity">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_above="@+id/time_up_tv_id"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="112dp"
+        android:src="@drawable/ic_action_timer"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/time_up_tv_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ok_btn_id"
+        android:text="@string/time_up"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/ok_btn_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        style="?android:buttonBarButtonStyle"
+        android:background="@drawable/border"
+        android:textColor="@android:color/black"
+        android:text="OK" />
+
+</RelativeLayout>
