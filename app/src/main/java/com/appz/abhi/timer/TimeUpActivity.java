@@ -20,7 +20,7 @@ public class TimeUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.time_up);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        vibration_flag = prefs.getBoolean("notifications_new_message_vibrate", true);
+        vibration_flag = prefs.getBoolean("key_vibrate", true);
         final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         ok_btn = findViewById(R.id.ok_btn_id);
         ok_btn.setOnClickListener(new View.OnClickListener() {

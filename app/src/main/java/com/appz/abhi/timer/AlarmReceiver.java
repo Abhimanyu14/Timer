@@ -18,7 +18,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String alarms = prefs.getString("notifications_new_message_ringtone", "");
+        String alarms = prefs.getString("key_ringtone", "");
         Uri alarmRingtoneUri = Uri.parse(alarms);
         mediaPlayer = new MediaPlayer();
         try {

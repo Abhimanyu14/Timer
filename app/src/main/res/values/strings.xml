@@ -27,6 +27,7 @@
     <string name="reset">RESET</string>
 
     <!--Time Up Activity-->
-    <string name="time_up">Time Up...</string>
+    <string name="time_up">Time Up&#8230;</string>
+    <string name="ok">OK</string>
 
 </resources>

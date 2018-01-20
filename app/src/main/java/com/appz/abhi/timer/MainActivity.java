@@ -6,13 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
         implements NumberPicker.OnScrollListener, View.OnClickListener {
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity
     //  Data variables
     CountDownTimer countDownTimer;
     int milli_seconds;
+    String s;
 
     //  Alarm Manager
     AlarmManager alarmManager;
@@ -45,11 +47,11 @@ public class MainActivity extends AppCompatActivity
         //  Populate Number Picker
         String[] hour_data = new String[24];
         for (int i = 0; i < 24; i++) {
-            hour_data[i] = String.format("%02d", i);
+            hour_data[i] = String.format(Locale.getDefault(), "%02d", i);
         }
         String[] minute_data = new String[60];
         for (int i = 0; i < 60; i++) {
-            minute_data[i] = String.format("%02d", i);
+            minute_data[i] = String.format(Locale.getDefault(), "%02d", i);
         }
 
         hour_np.setMinValue(0);
@@ -84,26 +86,28 @@ public class MainActivity extends AppCompatActivity
         int min = Integer.parseInt(min_str);
         int sec = Integer.parseInt(sec_str);
 
-        String hourStr = String.format("%02d", (hour));
-        String minStr = String.format("%02d", (min));
-        String secStr = String.format("%02d", (sec));
-
+        String hourStr = String.format(Locale.getDefault(), "%02d", (hour));
+        String minStr = String.format(Locale.getDefault(), "%02d", (min));
+        String secStr = String.format(Locale.getDefault(), "%02d", (sec));
         switch (id) {
             case R.id.hour_np_id:
-                timer_tv.setText(String.format("%02d", (hour_np.getValue()))
-                        + ":" + minStr + ":" + secStr);
+                s = String.format(Locale.getDefault(), "%02d", (hour_np.getValue()))
+                        + ":" + minStr + ":" + secStr;
+                timer_tv.setText(s);
                 milli_seconds = (((hour_np.getValue() * 60) + min) * 60 + sec) * 1000;
                 break;
 
             case R.id.min_np_id:
-                timer_tv.setText(hourStr + ":"
-                        + String.format("%02d", (min_np.getValue())) + ":" + secStr);
+                s = hourStr + ":" + String.format(Locale.getDefault(),
+                        "%02d", (min_np.getValue())) + ":" + secStr;
+                timer_tv.setText(s);
                 milli_seconds = (((hour * 60) + min_np.getValue()) * 60 + sec) * 1000;
                 break;
 
             case R.id.sec_np_id:
-                timer_tv.setText(hourStr + ":" + minStr +
-                        ":" + String.format("%02d", (sec_np.getValue())));
+                s = hourStr + ":" + minStr + ":" + String.format(Locale.getDefault(),
+                        "%02d", (sec_np.getValue()));
+                timer_tv.setText(s);
                 milli_seconds = (((hour * 60) + min) * 60 + sec_np.getValue()) * 1000;
                 break;
         }
@@ -125,10 +129,11 @@ public class MainActivity extends AppCompatActivity
                     int hour_rem = (int) (millisUntilFinished / (1000 * 60 * 60));
                     int min_rem = (int) ((millisUntilFinished / (1000 * 60)) - (hour_rem * 60));
                     int sec_rem = (int) ((millisUntilFinished / 1000) - (hour_rem * 60 * 60) - (min_rem * 60));
-                    String hourStr = String.format("%02d", (hour_rem));
-                    String minStr = String.format("%02d", (min_rem));
-                    String secStr = String.format("%02d", (sec_rem));
-                    timer_tv.setText(hourStr + ":" + minStr + ":" + secStr);
+                    String hourStr = String.format(Locale.getDefault(), "%02d", (hour_rem));
+                    String minStr = String.format(Locale.getDefault(), "%02d", (min_rem));
+                    String secStr = String.format(Locale.getDefault(), "%02d", (sec_rem));
+                    s = hourStr + ":" + minStr + ":" + secStr;
+                    timer_tv.setText(s);
                 }
 
                 public void onFinish() {
@@ -175,5 +180,4 @@ public class MainActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

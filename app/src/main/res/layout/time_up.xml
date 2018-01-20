@@ -27,13 +27,13 @@
 
     <Button
         android:id="@+id/ok_btn_id"
+        style="?android:buttonBarButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
-        style="?android:buttonBarButtonStyle"
         android:background="@drawable/border"
-        android:textColor="@android:color/black"
-        android:text="OK" />
+        android:text="@string/ok"
+        android:textColor="@android:color/black" />
 
 </RelativeLayout>

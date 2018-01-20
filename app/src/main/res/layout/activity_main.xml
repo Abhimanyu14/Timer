@@ -78,8 +78,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal"
                 android:descendantFocusability="blocksDescendants"
+                android:orientation="horizontal"
                 android:theme="@style/MyNumberPicker" />
 
             <TextView
@@ -95,8 +95,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal"
                 android:descendantFocusability="blocksDescendants"
+                android:orientation="horizontal"
                 android:theme="@style/MyNumberPicker" />
 
             <TextView
@@ -112,8 +112,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="horizontal"
                 android:descendantFocusability="blocksDescendants"
+                android:orientation="horizontal"
                 android:theme="@style/MyNumberPicker" />
 
         </LinearLayout>
@@ -124,23 +124,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/_00_00_00"
-        android:textColor="@android:color/holo_blue_light"
         android:textAlignment="center"
+        android:textColor="@android:color/holo_blue_light"
         android:textSize="90sp" />
 
     <LinearLayout
+        style="?android:buttonBarButtonStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="?android:buttonBarButtonStyle">
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/start_timer_btn_id"
+            style="?android:buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="@string/start"
-            style="?android:buttonBarButtonStyle"
             android:background="@drawable/border"
+            android:text="@string/start"
             android:textColor="@android:color/black" />
 
     </LinearLayout>
