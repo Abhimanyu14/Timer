@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity
         implements NumberPicker.OnScrollListener, View.OnClickListener {
 
     //  UI components
-    Button start_timer_btn;
+    static Button start_timer_btn;
     TextView timer_tv;
     NumberPicker hour_np, min_np, sec_np;
 
@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity
         String hourStr = String.format(Locale.getDefault(), "%02d", (hour));
         String minStr = String.format(Locale.getDefault(), "%02d", (min));
         String secStr = String.format(Locale.getDefault(), "%02d", (sec));
+
         switch (id) {
             case R.id.hour_np_id:
                 s = String.format(Locale.getDefault(), "%02d", (hour_np.getValue()))
@@ -115,53 +116,59 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onClick(View v) {
-        if (start_timer_btn.getText().toString().equals("START")) {
+        switch (start_timer_btn.getText().toString()) {
+            case "START": {
+                Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                PendingIntent pendingIntent = PendingIntent
+                        .getBroadcast(getApplicationContext(), 234324243, intent, 0);
+                alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP,
+                        System.currentTimeMillis() + milli_seconds, pendingIntent);
+                countDownTimer = new CountDownTimer(milli_seconds + 1000, 1000) {
+                    public void onTick(long millisUntilFinished) {
+                        int hour_rem = (int) (millisUntilFinished / (1000 * 60 * 60));
+                        int min_rem = (int) ((millisUntilFinished / (1000 * 60)) - (hour_rem * 60));
+                        int sec_rem = (int) ((millisUntilFinished / 1000) - (hour_rem * 60 * 60) - (min_rem * 60));
+                        String hourStr = String.format(Locale.getDefault(), "%02d", (hour_rem));
+                        String minStr = String.format(Locale.getDefault(), "%02d", (min_rem));
+                        String secStr = String.format(Locale.getDefault(), "%02d", (sec_rem));
+                        s = hourStr + ":" + minStr + ":" + secStr;
+                        timer_tv.setText(s);
+                    }
 
-            Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            PendingIntent pendingIntent = PendingIntent
-                    .getBroadcast(getApplicationContext(), 234324243, intent, 0);
-            alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-            alarmManager.set(AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis() + milli_seconds, pendingIntent);
-            countDownTimer = new CountDownTimer(milli_seconds, 1000) {
-                public void onTick(long millisUntilFinished) {
-                    int hour_rem = (int) (millisUntilFinished / (1000 * 60 * 60));
-                    int min_rem = (int) ((millisUntilFinished / (1000 * 60)) - (hour_rem * 60));
-                    int sec_rem = (int) ((millisUntilFinished / 1000) - (hour_rem * 60 * 60) - (min_rem * 60));
-                    String hourStr = String.format(Locale.getDefault(), "%02d", (hour_rem));
-                    String minStr = String.format(Locale.getDefault(), "%02d", (min_rem));
-                    String secStr = String.format(Locale.getDefault(), "%02d", (sec_rem));
-                    s = hourStr + ":" + minStr + ":" + secStr;
-                    timer_tv.setText(s);
-                }
-
-                public void onFinish() {
-                    start_timer_btn.setText(getResources().getText(R.string.reset));
-                }
-            };
-            start_timer_btn.setText(getResources().getText(R.string.stop));
-            hour_np.setEnabled(false);
-            min_np.setEnabled(false);
-            sec_np.setEnabled(false);
-            countDownTimer.start();
-        } else if (start_timer_btn.getText().toString().equals("STOP")) {
-            Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            PendingIntent pendingIntent = PendingIntent
-                    .getBroadcast(getApplicationContext(), 234324243, intent, 0);
-            alarmManager.cancel(pendingIntent);
-            countDownTimer.cancel();
-            start_timer_btn.setText(getResources().getText(R.string.reset));
-        } else if (start_timer_btn.getText().toString().equals("RESET")) {
-            start_timer_btn.setText(getResources().getText(R.string.start));
-            hour_np.setValue(0);
-            min_np.setValue(0);
-            sec_np.setValue(0);
-            hour_np.setEnabled(true);
-            min_np.setEnabled(true);
-            sec_np.setEnabled(true);
-            timer_tv.setText(getResources().getText(R.string._00_00_00));
+                    public void onFinish() {
+                        start_timer_btn.setText(getResources().getText(R.string.reset));
+                    }
+                };
+                start_timer_btn.setText(getResources().getText(R.string.stop));
+                hour_np.setEnabled(false);
+                min_np.setEnabled(false);
+                sec_np.setEnabled(false);
+                countDownTimer.start();
+                break;
+            }
+            case "STOP": {
+                Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                PendingIntent pendingIntent = PendingIntent
+                        .getBroadcast(getApplicationContext(), 234324243, intent, 0);
+                alarmManager.cancel(pendingIntent);
+                countDownTimer.cancel();
+                start_timer_btn.setText(getResources().getText(R.string.reset));
+                break;
+            }
+            case "RESET": {
+                start_timer_btn.setText(getResources().getText(R.string.start));
+                hour_np.setValue(0);
+                min_np.setValue(0);
+                sec_np.setValue(0);
+                hour_np.setEnabled(true);
+                min_np.setEnabled(true);
+                sec_np.setEnabled(true);
+                timer_tv.setText(getResources().getText(R.string._00_00_00));
+                break;
+            }
         }
     }
 

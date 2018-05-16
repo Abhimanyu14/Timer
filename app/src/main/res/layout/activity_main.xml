@@ -123,22 +123,21 @@
         android:id="@+id/timer_tv_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:text="@string/_00_00_00"
         android:textAlignment="center"
         android:textColor="@android:color/holo_blue_light"
-        android:textSize="90sp" />
+        android:textSize="72sp" />
 
     <LinearLayout
-        style="?android:buttonBarButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/start_timer_btn_id"
-            style="?android:buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_margin="16dp"
             android:background="@drawable/border"
             android:text="@string/start"
             android:textColor="@android:color/black" />

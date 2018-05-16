@@ -40,7 +40,7 @@
         </activity>
         <activity
             android:name=".TimeUpActivity"
-            android:theme="@style/AppTheme.NoToolbar" />
+            android:theme="@style/AppTheme.NoAppbar" />
 
         <receiver android:name=".AlarmReceiver" />
 

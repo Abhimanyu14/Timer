@@ -30,8 +30,8 @@ public class AlarmReceiver extends BroadcastReceiver {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Intent intent1 = new Intent(context, TimeUpActivity.class);
-        intent1.addFlags(FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent1);
+        Intent timeUpIntent = new Intent(context, TimeUpActivity.class);
+        timeUpIntent.addFlags(FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(timeUpIntent);
     }
 }
